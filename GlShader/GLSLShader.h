@@ -1,7 +1,7 @@
 #pragma once
 #include <map>
 #include <string>
-#include <QOpenGLFunctions>
+#include <QOpenGLFunctions_4_5_Core>
 #include <QOpenGLShader>
 #include <QOpenGLShaderProgram>
 #include <QList>
@@ -29,5 +29,5 @@ private:
     GLuint	mProgram;
     GLuint mVertexShader;
     GLuint mFragmentShader;
-    QOpenGLFunctions *mOpenglFunction;
+    QOpenGLFunctions_4_5_Core *mOpenglFunction;
 };	

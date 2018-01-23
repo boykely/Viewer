@@ -4,6 +4,10 @@
 
 GlWidget::GlWidget(QWidget *parent):QOpenGLWidget(parent)
 {    
+    QSurfaceFormat format;
+    format.setVersion(4,5);
+    format.setProfile(QSurfaceFormat::CoreProfile);
+    setFormat(format);
 }
 GlWidget::~GlWidget()
 {
@@ -15,13 +19,13 @@ void GlWidget::initializeGL()
     //qDebug()<<width()<<" - "<<height()<<endl;
     glViewport(0,0,width(),height());
     glClearColor(0.2f, 0.3f,0.3f,1);
-    Triangle tri;
-    tri.Bind();
-    tri.Draw();
+    mTri=new Triangle();
+    mTri->Bind();
 }
 void GlWidget::paintGL()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);    
+    mTri->Draw();
 }
 QString GlWidget::GlGetVersion()
 {

@@ -13,7 +13,8 @@ public:
 private:
     float *mVertices;
     GLuint mVbo;
-    QOpenGLFunctions *mOpenGLFunctions;
+    GLuint mVao;
+    QOpenGLFunctions_4_5_Core *mOpenGLFunctions;
     GLSLShader *mShader;
 };
 

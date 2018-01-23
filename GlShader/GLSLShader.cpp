@@ -5,7 +5,7 @@
 
 GLSLShader::GLSLShader()
 {
-    mOpenglFunction=QOpenGLContext::currentContext()->functions();
+    mOpenglFunction=QOpenGLContext::currentContext()->versionFunctions<QOpenGLFunctions_4_5_Core>();
     if(!mOpenglFunction)
     {
         qDebug()<<"Le contexte opengl lance une erreur"<<endl;

@@ -2,9 +2,11 @@
 #define GLWIDGET_H
 
 #include<QOpenGLWidget>
-#include<QOpenGLFunctions>
+#include<QOpenGLFunctions_4_5_Core>
 
-class GlWidget:public QOpenGLWidget,protected QOpenGLFunctions
+class Triangle;
+
+class GlWidget:public QOpenGLWidget,protected QOpenGLFunctions_4_5_Core
 {
     Q_OBJECT
 public:
@@ -15,6 +17,7 @@ protected:
     void initializeGL() override;
     void paintGL() override;
 private:
+    Triangle *mTri;
 };
 
 #endif // GLWIDGET_H
