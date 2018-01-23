@@ -2,15 +2,18 @@
 #include <map>
 #include <string>
 #include <QOpenGLFunctions>
+#include <QOpenGLShader>
+#include <QOpenGLShaderProgram>
+#include <QList>
 
 using namespace std;
 
 class GLSLShader
 {
 public:
-	GLSLShader(void);
+    GLSLShader();
 	~GLSLShader(void);		
-    void CreateAndCompileShader(const string &vertexFile,const string &fragmentFile);
+    void CreateAndCompileShader(QString &vertexFile,QString &fragmentFile);
 	void CreateAndLinkProgram();
 	void Use();
 	void UnUse();
@@ -18,9 +21,11 @@ public:
 
 
 private:
-    const char* LoadFromFile(const string& filename);
+    QString LoadFromFile(const string& filename);
 
 	enum ShaderType {VERTEX_SHADER, FRAGMENT_SHADER, GEOMETRY_SHADER};
+    QList<QOpenGLShader*> *codeShader;
+    QOpenGLShaderProgram shaderProgram;
     GLuint	mProgram;
     GLuint mVertexShader;
     GLuint mFragmentShader;

@@ -3,7 +3,7 @@
 #include <fstream>
 #include <QDebug>
 
-GLSLShader::GLSLShader(void)
+GLSLShader::GLSLShader()
 {
     mOpenglFunction=QOpenGLContext::currentContext()->functions();
     if(!mOpenglFunction)
@@ -18,72 +18,64 @@ GLSLShader::~GLSLShader(void)
 
 }
 
-void GLSLShader::CreateAndCompileShader(const string &vertexFile,const string &fragmentFile)
+void GLSLShader::CreateAndCompileShader(QString &vertexFile,QString &fragmentFile)
 {
-    mOpenglFunction->glCreateShader(GL_VERTEX_SHADER);
-    const char* vertexSourceShader=LoadFromFile(vertexFile);
-    mOpenglFunction->glShaderSource(mVertexShader,1,&vertexSourceShader,NULL);
-    mOpenglFunction->glCompileShader(mVertexShader);
-    int success;
-    char infoLog[512];
-    mOpenglFunction->glGetShaderiv(mVertexShader,GL_COMPILE_STATUS,&success);
-    if(!success)
+    codeShader=new QList<QOpenGLShader*>();
+    codeShader->append(new QOpenGLShader(QOpenGLShader::Vertex));
+    if(!codeShader->at(0)->compileSourceFile(vertexFile))
     {
-        mOpenglFunction->glGetShaderInfoLog(mVertexShader,512,NULL,infoLog);
-        qDebug()<<"VERTEX Shader compilation error:"<<QString(infoLog)<<endl;
+        qDebug()<<"VERTEX SHADER COMPILATION ERROR:"<<codeShader->at(0)->log()<<endl;
     }
-    mOpenglFunction->glCreateShader(GL_FRAGMENT_SHADER);
-    const char* fragmentSourceShader=LoadFromFile(fragmentFile);
-    mOpenglFunction->glShaderSource(mFragmentShader,1,&fragmentSourceShader,NULL);
-    mOpenglFunction->glCompileShader(mFragmentShader);
-    mOpenglFunction->glGetShaderiv(mFragmentShader,GL_COMPILE_STATUS,&success);
-    if(!success)
+    mVertexShader=codeShader->at(0)->shaderId();
+
+    codeShader->append(new QOpenGLShader(QOpenGLShader::Fragment));
+    if(!codeShader->at(1)->compileSourceFile(fragmentFile))
     {
-        mOpenglFunction->glGetShaderInfoLog(mVertexShader,512,NULL,infoLog);
-        qDebug()<<"FRAGMENT Shader compilation error:"<<infoLog<<endl;
+        qDebug()<<"FRAGMENT SHADER COMPILATION ERROR:"<<codeShader->at(1)->log()<<endl;
     }
+    mFragmentShader=codeShader->at(1)->shaderId();
+    //
+
 }
 
 void GLSLShader::DeleteShaderProgram() {	
 }
 
 void GLSLShader::CreateAndLinkProgram() {
-    mProgram= mOpenglFunction->glCreateProgram();
-    mOpenglFunction->glAttachShader(mProgram,mVertexShader);
-    mOpenglFunction->glAttachShader(mProgram,mFragmentShader);
-    mOpenglFunction->glLinkProgram(mProgram);
-    int success;
-    char infoLog[512];
-    mOpenglFunction->glGetProgramiv(mProgram,GL_LINK_STATUS,&success);
-    if(!success)
-    {
-        mOpenglFunction->glGetProgramInfoLog(mProgram,512,NULL,infoLog);
-        qDebug()<<"LINKAGE SHader error:"<<infoLog<<endl;
-    }
+    if(!shaderProgram.create())
+        qDebug()<<"Shader program not created"<<endl;
+    mProgram=shaderProgram.programId();
+    shaderProgram.addShader(codeShader->at(0));
+    shaderProgram.addShader(codeShader->at(1));
+    if(!shaderProgram.link())
+        qDebug()<<"LINKAGE SHADER ERROR:"<<shaderProgram.log()<<endl;
+
     mOpenglFunction->glDeleteShader(mVertexShader);
     mOpenglFunction->glDeleteShader(mFragmentShader);
+
 }
 
 void GLSLShader::Use() {
-    mOpenglFunction->glUseProgram(mProgram);
+    shaderProgram.bind();
 }
 
 void GLSLShader::UnUse() {
-    mOpenglFunction->glDeleteProgram(mProgram);
+    shaderProgram.release();
 }
 
-const char *GLSLShader::LoadFromFile(const string& filename){
+QString GLSLShader::LoadFromFile(const string& filename){
 	ifstream fp;
 	fp.open(filename.c_str(), ios_base::in);
 	if(fp) {		 
-		string line, buffer;
+        string line,buffer;
 		while(getline(fp, line)) {
 			buffer.append(line);
 			buffer.append("\r\n");
         }
-        return buffer.c_str();
+        //qDebug()<<QString(buffer.c_str())<<endl;
+        return QString(buffer.c_str());
 	} else {
         qDebug()<<"Error loading shader: "<<filename.c_str()<<endl;
-        return NULL;
+        exit(0);
 	}
 }

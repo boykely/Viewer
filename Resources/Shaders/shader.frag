@@ -1,6 +1,6 @@
 #version 330 core
 
-layout(location=0) out vec4 vFragColor;	//fragment shader output
+out vec4 vFragColor;	//fragment shader output
 
 
 void main()
