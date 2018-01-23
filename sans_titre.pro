@@ -28,13 +28,15 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     glwidget.cpp \
-    main.cpp \
-    mainwindow.cpp
+    GlShader/GLSLShader.cpp \
+    Object/triangle.cpp
 
 HEADERS += \
         mainwindow.h \
     glwidget.h \
-    mainwindow.h
+    mainwindow.h \
+    GlShader/GLSLShader.h \
+    Object/triangle.h
 
 win32: LIBS += -L$$PWD/Lib/soil/lib/ -llibSOIL
 
@@ -43,3 +45,7 @@ DEPENDPATH += $$PWD/Lib/soil/src
 
 win32:!win32-g++: PRE_TARGETDEPS += $$PWD/Lib/soil/lib/libSOIL.lib
 else:win32-g++: PRE_TARGETDEPS += $$PWD/Lib/soil/lib/liblibSOIL.a
+
+DISTFILES += \
+    Resources/Shaders/shader.frag \
+    Resources/Shaders/shader.vert

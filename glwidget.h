@@ -14,6 +14,7 @@ public:
 protected:
     void initializeGL() override;
     void paintGL() override;
+private:
 };
 
 #endif // GLWIDGET_H
