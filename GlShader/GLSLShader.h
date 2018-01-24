@@ -11,13 +11,14 @@ using namespace std;
 class GLSLShader
 {
 public:
-    GLSLShader();
+    GLSLShader(QString &_pathVertex,QString &_pathFragment);
 	~GLSLShader(void);		
-    void CreateAndCompileShader(QString &vertexFile,QString &fragmentFile);
+    void CreateAndCompileShader();
 	void CreateAndLinkProgram();
 	void Use();
 	void UnUse();
 	void DeleteShaderProgram();
+    QOpenGLShaderProgram *ShaderProgram(){return &shaderProgram;}
 
 
 private:
@@ -30,4 +31,6 @@ private:
     GLuint mVertexShader;
     GLuint mFragmentShader;
     QOpenGLFunctions_4_5_Core *mOpenglFunction;
+    QString mPathVertex;
+    QString mPathFragment;
 };	

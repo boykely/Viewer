@@ -12,5 +12,5 @@ void main()
 {
    //vertex position
     glColor=vec4(vColor,1);
-    gl_Position = vec4(vVertex,1);
+    gl_Position =MVP* vec4(vVertex,1);
 }

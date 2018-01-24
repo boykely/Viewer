@@ -7,7 +7,7 @@
 class Triangle
 {
 public:
-    Triangle();
+    Triangle(QString &_pathVertex,QString &_pathFragment);
     void Bind();
     void Draw();
 private:

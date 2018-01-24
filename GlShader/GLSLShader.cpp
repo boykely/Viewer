@@ -3,7 +3,7 @@
 #include <fstream>
 #include <QDebug>
 
-GLSLShader::GLSLShader()
+GLSLShader::GLSLShader(QString &_pathVertex,QString &_pathFragment):mPathVertex(_pathVertex),mPathFragment(_pathFragment)
 {
     mOpenglFunction=QOpenGLContext::currentContext()->versionFunctions<QOpenGLFunctions_4_5_Core>();
     if(!mOpenglFunction)
@@ -18,18 +18,18 @@ GLSLShader::~GLSLShader(void)
 
 }
 
-void GLSLShader::CreateAndCompileShader(QString &vertexFile,QString &fragmentFile)
+void GLSLShader::CreateAndCompileShader()
 {
     codeShader=new QList<QOpenGLShader*>();
     codeShader->append(new QOpenGLShader(QOpenGLShader::Vertex));
-    if(!codeShader->at(0)->compileSourceFile(vertexFile))
+    if(!codeShader->at(0)->compileSourceFile(mPathVertex))
     {
         qDebug()<<"VERTEX SHADER COMPILATION ERROR:"<<codeShader->at(0)->log()<<endl;
     }
     mVertexShader=codeShader->at(0)->shaderId();
 
     codeShader->append(new QOpenGLShader(QOpenGLShader::Fragment));
-    if(!codeShader->at(1)->compileSourceFile(fragmentFile))
+    if(!codeShader->at(1)->compileSourceFile(mPathFragment))
     {
         qDebug()<<"FRAGMENT SHADER COMPILATION ERROR:"<<codeShader->at(1)->log()<<endl;
     }

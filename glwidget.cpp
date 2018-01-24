@@ -19,7 +19,9 @@ void GlWidget::initializeGL()
     //qDebug()<<width()<<" - "<<height()<<endl;
     glViewport(0,0,width(),height());
     glClearColor(0.2f, 0.3f,0.3f,1);
-    mTri=new Triangle();
+    QString pathVertex("../sans_titre/Resources/Shaders/shader.vert");
+    QString pathFragment("../sans_titre/Resources/Shaders/shader.frag");
+    mTri=new Triangle(pathVertex,pathFragment);
     mTri->Bind();
 }
 void GlWidget::paintGL()

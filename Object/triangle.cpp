@@ -1,10 +1,17 @@
 #include "triangle.h"
-#include <vec3.hpp>
+#include <glm.hpp>
+#include <gtc/matrix_transform.hpp>
+#include <gtc/type_ptr.hpp>
 #include <QDebug>
 
-Triangle::Triangle()
-{
+//projection and modelview matrices
+//setup the projection matrix
+glm::mat4  P = glm::ortho(-1,1,-1,1);
+glm::mat4 MV = glm::mat4(1);
 
+Triangle::Triangle(QString &_pathVertex,QString &_pathFragment)
+{
+    mShader=new GLSLShader(_pathVertex,_pathFragment);
 }
 void Triangle::Bind()
 {
@@ -35,10 +42,7 @@ void Triangle::Bind()
     mColors=&_colors[0];
 
     mOpenGLFunctions=QOpenGLContext::currentContext()->versionFunctions<QOpenGLFunctions_4_5_Core>();
-    mShader=new GLSLShader();
-    QString pathVertex("../sans_titre/Resources/Shaders/shader.vert");
-    QString pathFragment("../sans_titre/Resources/Shaders/shader.frag");
-    mShader->CreateAndCompileShader(pathVertex,pathFragment);
+    mShader->CreateAndCompileShader();
     mShader->CreateAndLinkProgram();
     //Init VBO
     mOpenGLFunctions->glGenBuffers(1,&mVbo);
@@ -67,6 +71,8 @@ void Triangle::Bind()
 void Triangle::Draw()
 {
     mShader->Use();
+    GLint mvpAttrib=mOpenGLFunctions->glGetUniformLocation(mShader->ShaderProgram()->programId(),"MVP");
+    mOpenGLFunctions->glUniformMatrix4fv(mvpAttrib,1,GL_FALSE,glm::value_ptr(P*MV));
     mOpenGLFunctions->glBindVertexArray(mVao);
     mOpenGLFunctions->glDrawArrays(GL_TRIANGLES,0,3);
 }
