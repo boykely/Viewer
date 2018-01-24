@@ -12,7 +12,9 @@ public:
     void Draw();
 private:
     float *mVertices;
+    float *mColors;
     GLuint mVbo;
+    GLuint mVbo2;
     GLuint mVao;
     QOpenGLFunctions_4_5_Core *mOpenGLFunctions;
     GLSLShader *mShader;
