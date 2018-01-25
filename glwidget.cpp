@@ -1,4 +1,5 @@
 #include "glwidget.h"
+#include "Object/plane.h"
 #include "Object/triangle.h"
 #include <QDebug>
 
@@ -21,13 +22,13 @@ void GlWidget::initializeGL()
     glClearColor(0.2f, 0.3f,0.3f,1);
     QString pathVertex("../sans_titre/Resources/Shaders/shader.vert");
     QString pathFragment("../sans_titre/Resources/Shaders/shader.frag");
-    mTri=new Triangle(pathVertex,pathFragment);
-    mTri->Bind();
+    mPlane=new plane(pathVertex,pathFragment);
+    mPlane->Bind();
 }
 void GlWidget::paintGL()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);    
-    mTri->Draw();
+    mPlane->Draw();
 }
 QString GlWidget::GlGetVersion()
 {

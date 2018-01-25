@@ -29,14 +29,16 @@ SOURCES += \
         mainwindow.cpp \
     glwidget.cpp \
     GlShader/GLSLShader.cpp \
-    Object/triangle.cpp
+    Object/triangle.cpp \
+    Object/plane.cpp
 
 HEADERS += \
         mainwindow.h \
     glwidget.h \
     mainwindow.h \
     GlShader/GLSLShader.h \
-    Object/triangle.h
+    Object/triangle.h \
+    Object/plane.h
 
 win32: LIBS += -L$$PWD/Lib/soil/lib/ -llibSOIL
 
