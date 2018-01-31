@@ -3,9 +3,9 @@
 
 #include<QOpenGLWidget>
 #include<QOpenGLFunctions_4_5_Core>
+#include "Object/object3d.h"
+#include <QList>
 
-class Triangle;
-class plane;
 
 class GlWidget:public QOpenGLWidget,protected QOpenGLFunctions_4_5_Core
 {
@@ -13,13 +13,13 @@ class GlWidget:public QOpenGLWidget,protected QOpenGLFunctions_4_5_Core
 public:
     GlWidget(QWidget *parent=0);
     QString GlGetVersion();
+    QList<Object3d *> *Objects();
     ~GlWidget();
 protected:
     void initializeGL() override;
     void paintGL() override;
 private:
-    Triangle *mTri;
-    plane *mPlane;
+    QList<Object3d *> *mObjects;
 };
 
 #endif // GLWIDGET_H

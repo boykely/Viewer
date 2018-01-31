@@ -4,7 +4,7 @@
 #include <gtc/type_ptr.hpp>
 #include <QDebug>
 
-Triangle::Triangle(QString &_pathVertex,QString &_pathFragment)
+Triangle::Triangle(QString &_pathVertex,QString &_pathFragment):Object3d()
 {
     mShader=new GLSLShader(_pathVertex,_pathFragment);
 }

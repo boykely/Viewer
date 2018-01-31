@@ -4,7 +4,7 @@
 #include <gtc/type_ptr.hpp>
 #include <QDebug>
 
-plane::plane(QString &_pathVertex,QString &_pathFragment)
+plane::plane(QString &_pathVertex,QString &_pathFragment):Object3d()
 {
     mShader=new GLSLShader(_pathVertex,_pathFragment);
 }

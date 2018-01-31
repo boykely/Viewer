@@ -3,13 +3,14 @@
 
 #include <QOpenGLFunctions>
 #include "GlShader/GLSLShader.h"
+#include "Object/object3d.h"
 
-class plane
+class plane:public Object3d
 {
 public:
     plane(QString &_pathVertex,QString &_pathFragment);
-    void Bind();
-    void Draw();
+    void Bind() override;
+    void Draw() override;
 private:
     float *mVertices;
     float *mColors;

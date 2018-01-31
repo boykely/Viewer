@@ -9,6 +9,7 @@ GlWidget::GlWidget(QWidget *parent):QOpenGLWidget(parent)
     format.setVersion(4,5);
     format.setProfile(QSurfaceFormat::CoreProfile);
     setFormat(format);
+    mObjects=new QList<Object3d *>();
 }
 GlWidget::~GlWidget()
 {
@@ -17,22 +18,26 @@ GlWidget::~GlWidget()
 void GlWidget::initializeGL()
 {
     initializeOpenGLFunctions();
-    //qDebug()<<width()<<" - "<<height()<<endl;
     glViewport(0,0,width(),height());
-    glClearColor(0.2f, 0.3f,0.3f,1);
-    QString pathVertex("../sans_titre/Resources/Shaders/shader.vert");
-    QString pathFragment("../sans_titre/Resources/Shaders/shader.frag");
-    mPlane=new plane(pathVertex,pathFragment);
-    mPlane->Bind();
+    glClearColor(0.2f, 0.3f,0.3f,1);    
 }
 void GlWidget::paintGL()
 {
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);    
-    mPlane->Draw();
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    for(int i=0;i<mObjects->count();i++)
+    {
+        mObjects->at(i)->Draw();
+    }
+
 }
 QString GlWidget::GlGetVersion()
 {
     const char* version=(const char*)glGetString(GL_VERSION);
     return QString(version);
+}
+
+QList<Object3d *> *GlWidget::Objects()
+{
+    return mObjects;
 }
 

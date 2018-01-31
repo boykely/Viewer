@@ -30,7 +30,9 @@ SOURCES += \
     glwidget.cpp \
     GlShader/GLSLShader.cpp \
     Object/triangle.cpp \
-    Object/plane.cpp
+    Object/plane.cpp \
+    Object/ripplemesh.cpp \
+    Object/object3d.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -38,7 +40,9 @@ HEADERS += \
     mainwindow.h \
     GlShader/GLSLShader.h \
     Object/triangle.h \
-    Object/plane.h
+    Object/plane.h \
+    Object/ripplemesh.h \
+    Object/object3d.h
 
 win32: LIBS += -L$$PWD/Lib/soil/lib/ -llibSOIL
 
