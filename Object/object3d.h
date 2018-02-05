@@ -8,6 +8,7 @@ public:
     Object3d();
     virtual void Bind(){}
     virtual void Draw(){}
+    int Id;
 };
 
 #endif // OBJECT3D_H

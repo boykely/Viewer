@@ -32,7 +32,9 @@ SOURCES += \
     Object/triangle.cpp \
     Object/plane.cpp \
     Object/ripplemesh.cpp \
-    Object/object3d.cpp
+    Object/object3d.cpp \
+    addobjectcommand.cpp \
+    transformobjectcommand.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -42,7 +44,9 @@ HEADERS += \
     Object/triangle.h \
     Object/plane.h \
     Object/ripplemesh.h \
-    Object/object3d.h
+    Object/object3d.h \
+    addobjectcommand.h \
+    transformobjectcommand.h
 
 win32: LIBS += -L$$PWD/Lib/soil/lib/ -llibSOIL
 

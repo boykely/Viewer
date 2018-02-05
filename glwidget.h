@@ -14,7 +14,11 @@ public:
     GlWidget(QWidget *parent=0);
     QString GlGetVersion();
     QList<Object3d *> *Objects();
+    void Append(Object3d *);
+    void Remove(Object3d *);
     ~GlWidget();
+
+    static int ObjectsCount;
 protected:
     void initializeGL() override;
     void paintGL() override;

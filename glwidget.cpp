@@ -3,6 +3,8 @@
 #include "Object/triangle.h"
 #include <QDebug>
 
+int GlWidget::ObjectsCount=0;
+
 GlWidget::GlWidget(QWidget *parent):QOpenGLWidget(parent)
 {    
     QSurfaceFormat format;
@@ -39,5 +41,21 @@ QString GlWidget::GlGetVersion()
 QList<Object3d *> *GlWidget::Objects()
 {
     return mObjects;
+}
+
+void GlWidget::Append(Object3d *_obj)
+{
+    _obj->Id=mObjects->count();
+    mObjects->append(_obj);
+    ObjectsCount=mObjects->count();
+}
+
+void GlWidget::Remove(Object3d *_obj)
+{
+    for(int i=0;i<mObjects->count();i++)
+    {
+        if(_obj->Id==mObjects->at(i)->Id)
+            mObjects->removeAt(i);
+    }
 }
 

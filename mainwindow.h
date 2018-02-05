@@ -7,6 +7,7 @@
 #include <QMenu>
 #include<QMenuBar>
 #include <QAction>
+#include <QUndoStack>
 
 class GlWidget;
 
@@ -31,6 +32,7 @@ private:
     QMenu *mEditMenu;
     QAction *mUndoAction;
     QAction *mRedoAction;
+    QUndoStack *mUndoStack;
 
     void initMenu();
 };

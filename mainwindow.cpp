@@ -18,7 +18,8 @@ MainWindow::MainWindow(QWidget *parent) :
     central->setLayout(mLayout);
     setCentralWidget(central);    
 
-    initMenu();
+    mUndoStack=new QUndoStack(this);
+    initMenu();    
 }
 
 MainWindow::~MainWindow()
@@ -43,8 +44,10 @@ void MainWindow::initMenu()
 {
     mFileMenu=menuBar()->addMenu("File");
     mEditMenu=menuBar()->addMenu("Edit");
-    mUndoAction=mEditMenu->addAction("Undo");
-    mRedoAction=mEditMenu->addAction("Redo");
+    mUndoAction=mUndoStack->createUndoAction(this,"Undo");
+    mRedoAction=mUndoStack->createRedoAction(this,"Redo");
+    mEditMenu->addAction(mUndoAction);
+    mEditMenu->addAction(mRedoAction);
 }
 
 void MainWindow::addTriangle()
@@ -53,7 +56,7 @@ void MainWindow::addTriangle()
     QString pathFragment("../sans_titre/Resources/Shaders/shader.frag");
     Triangle *tri=new Triangle(pathVertex,pathFragment);
     tri->Bind();
-    mGlWidget->Objects()->append(tri);
+    mGlWidget->Append(tri);
 }
 
 void MainWindow::addPlane()
@@ -62,5 +65,5 @@ void MainWindow::addPlane()
     QString pathFragment("../sans_titre/Resources/Shaders/shader.frag");
     plane *plan=new plane(pathVertex,pathFragment);
     plan->Bind();
-    mGlWidget->Objects()->append(plan);
+    mGlWidget->Append(plan);
 }
