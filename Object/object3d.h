@@ -7,6 +7,7 @@ class Object3d
 public:
     Object3d();
     virtual void Bind(){}
+    virtual void Unbind(){}
     virtual void Draw(){}
     int Id;
 };

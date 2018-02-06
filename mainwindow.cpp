@@ -6,6 +6,7 @@
 #include <QRect>
 #include "Object/triangle.h"
 #include "Object/plane.h"
+#include "addobjectcommand.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent)
@@ -36,8 +37,7 @@ void MainWindow::show()
     setFixedSize(geometryWindow.width(),(geometryWindow.height()/2));
     QMainWindow::show();
     setWindowTitle("Learn OpenGL - "+mGlWidget->GlGetVersion());
-    addTriangle();
-    addPlane();
+    addObject();
 }
 
 void MainWindow::initMenu()
@@ -50,20 +50,15 @@ void MainWindow::initMenu()
     mEditMenu->addAction(mRedoAction);
 }
 
-void MainWindow::addTriangle()
+void MainWindow::addObject()
 {
     QString pathVertex("../sans_titre/Resources/Shaders/shader.vert");
     QString pathFragment("../sans_titre/Resources/Shaders/shader.frag");
     Triangle *tri=new Triangle(pathVertex,pathFragment);
     tri->Bind();
-    mGlWidget->Append(tri);
-}
+    mUndoStack->push(new AddObjectCommand(mGlWidget,tri));
 
-void MainWindow::addPlane()
-{
-    QString pathVertex("../sans_titre/Resources/Shaders/shader.vert");
-    QString pathFragment("../sans_titre/Resources/Shaders/shader.frag");
     plane *plan=new plane(pathVertex,pathFragment);
     plan->Bind();
-    mGlWidget->Append(plan);
+    mUndoStack->push(new AddObjectCommand(mGlWidget,plan));
 }

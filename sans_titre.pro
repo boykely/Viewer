@@ -34,7 +34,8 @@ SOURCES += \
     Object/ripplemesh.cpp \
     Object/object3d.cpp \
     addobjectcommand.cpp \
-    transformobjectcommand.cpp
+    transformobjectcommand.cpp \
+    removeobjectcommand.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -46,7 +47,8 @@ HEADERS += \
     Object/ripplemesh.h \
     Object/object3d.h \
     addobjectcommand.h \
-    transformobjectcommand.h
+    transformobjectcommand.h \
+    removeobjectcommand.h
 
 win32: LIBS += -L$$PWD/Lib/soil/lib/ -llibSOIL
 

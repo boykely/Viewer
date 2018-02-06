@@ -19,8 +19,7 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
-    void addTriangle();
-    void addPlane();
+    void addObject();
 public slots:
     void showMaximized();
     void show();
