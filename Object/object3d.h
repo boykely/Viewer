@@ -1,6 +1,9 @@
 #ifndef OBJECT3D_H
 #define OBJECT3D_H
 
+#include <glm.hpp>
+#include <gtc/matrix_transform.hpp>
+#include <gtc/type_ptr.hpp>
 
 class Object3d
 {

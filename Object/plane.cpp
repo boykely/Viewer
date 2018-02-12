@@ -1,7 +1,4 @@
 #include "plane.h"
-#include <glm.hpp>
-#include <gtc/matrix_transform.hpp>
-#include <gtc/type_ptr.hpp>
 #include <QDebug>
 
 plane::plane(QString &_pathVertex,QString &_pathFragment):Object3d()

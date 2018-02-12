@@ -6,6 +6,7 @@
 #include <QRect>
 #include "Object/triangle.h"
 #include "Object/plane.h"
+#include "Object/ripplemesh.h"
 #include "addobjectcommand.h"
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -54,6 +55,8 @@ void MainWindow::addObject()
 {
     QString pathVertex("../sans_titre/Resources/Shaders/shader.vert");
     QString pathFragment("../sans_titre/Resources/Shaders/shader.frag");
+    QString pathVertex1("../sans_titre/Resources/Shaders/ripple.vert");
+    QString pathFragment2("../sans_titre/Resources/Shaders/ripple.frag");
     Triangle *tri=new Triangle(pathVertex,pathFragment);
     tri->Bind();
     mUndoStack->push(new AddObjectCommand(mGlWidget,tri));
@@ -61,4 +64,8 @@ void MainWindow::addObject()
     plane *plan=new plane(pathVertex,pathFragment);
     plan->Bind();
     mUndoStack->push(new AddObjectCommand(mGlWidget,plan));
+
+    RippleMesh *ripple=new RippleMesh(pathVertex1,pathFragment2);
+    ripple->Bind();
+    mUndoStack->push(new AddObjectCommand(mGlWidget,ripple));
 }

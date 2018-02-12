@@ -1,7 +1,4 @@
 #include "triangle.h"
-#include <glm.hpp>
-#include <gtc/matrix_transform.hpp>
-#include <gtc/type_ptr.hpp>
 #include <QDebug>
 
 Triangle::Triangle(QString &_pathVertex,QString &_pathFragment):Object3d()

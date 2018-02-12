@@ -60,4 +60,6 @@ else:win32-g++: PRE_TARGETDEPS += $$PWD/Lib/soil/lib/liblibSOIL.a
 
 DISTFILES += \
     Resources/Shaders/shader.frag \
-    Resources/Shaders/shader.vert
+    Resources/Shaders/shader.vert \
+    Resources/Shaders/ripple.frag \
+    Resources/Shaders/ripple.vert
