@@ -4,5 +4,5 @@ layout (location = 0) out vec4 glFragColor;
 
 void main()
 {
-    glFragColor=vec4(1,1,1,1);
+    glFragColor=vec4(1,0,0,1);
 }

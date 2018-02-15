@@ -1,5 +1,6 @@
 #include "ripplemesh.h"
-#include<QSet>
+#include <QSet>
+#include <QDebug>
 
 const int RippleMesh::mGridX=5;
 const int RippleMesh::mGridZ=5;
@@ -17,9 +18,9 @@ void RippleMesh::Bind()
     for(int j=0;j<mGridZ;j++)
         for(int i=0;i<mGridX;i++)
         {
-            _vertices[k]=i/(mGridX);
+            _vertices[k]=(float)i/(mGridX);
             _vertices[k+1]=0;
-            _vertices[k+2]=j/(mGridZ);
+            _vertices[k+2]=(float)j/(mGridZ);
             k+=3;
         }
     mVertices=&_vertices[0];
@@ -70,8 +71,8 @@ void RippleMesh::Draw()
     glm::mat4 MV = glm::mat4(1);
 
     mShader->Use();
-//    GLint mvpAttrib=mOpenGLFunctions->glGetUniformLocation(mShader->ShaderProgram()->programId(),"MVP");
-//    mOpenGLFunctions->glUniformMatrix4fv(mvpAttrib,1,GL_FALSE,glm::value_ptr(P*MV));
+    GLint mvpAttrib=mOpenGLFunctions->glGetUniformLocation(mShader->ShaderProgram()->programId(),"MVP");
+    mOpenGLFunctions->glUniformMatrix4fv(mvpAttrib,1,GL_FALSE,glm::value_ptr(P*MV));
     mOpenGLFunctions->glBindVertexArray(mVao);
     mOpenGLFunctions->glDrawElements(GL_TRIANGLES,mGridX*mGridZ*6,GL_UNSIGNED_INT,0);
     mOpenGLFunctions->glBindVertexArray(0);
