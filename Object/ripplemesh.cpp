@@ -2,8 +2,8 @@
 #include <QSet>
 #include <QDebug>
 
-const int RippleMesh::mGridX=50;
-const int RippleMesh::mGridZ=50;
+const int RippleMesh::mGridX=5;
+const int RippleMesh::mGridZ=5;
 
 RippleMesh::RippleMesh(QString &_pathVertex,QString &_pathFragment,int _w,int _h):Object3d(_w,_h)
 {
@@ -74,14 +74,17 @@ void RippleMesh::Draw()
     model=glm::scale(model,glm::vec3(15,1,15));
     model=glm::translate(model,glm::vec3(-0.5,-2,0));
     model=glm::rotate(model,glm::radians(10.0f),glm::vec3(1,0,0));
-    view=glm::translate(view,glm::vec3(0,0,-7));
+    view=glm::translate(view,glm::vec3(0,0,-20));
     glm::mat4 perspective=glm::perspective(45.0f,(float)ScreenWidth/ScreenHeight,0.01f,100.0f);
+    float time=100.0f;
 
     mShader->Use();
     GLint mvpAttrib=mOpenGLFunctions->glGetUniformLocation(mShader->ShaderProgram()->programId(),"MVP");
-//    GLint timeAttrib=mOpenGLFunctions->glGetUniformLocation(mShader->ShaderProgram()->programId(),"time");
-//    mOpenGLFunctions->glUniform1f(timeAttrib,time);
+    GLint timeAttrib=mOpenGLFunctions->glGetUniformLocation(mShader->ShaderProgram()->programId(),"time");
+
+    mOpenGLFunctions->glUniform1f(timeAttrib,time);
     mOpenGLFunctions->glUniformMatrix4fv(mvpAttrib,1,GL_FALSE,glm::value_ptr(perspective*view*model));
+
     mOpenGLFunctions->glBindVertexArray(mVao);
     mOpenGLFunctions->glDrawElements(GL_TRIANGLES,mGridX*mGridZ*6,GL_UNSIGNED_INT,0);
     mOpenGLFunctions->glBindVertexArray(0);
