@@ -21,7 +21,7 @@ void GlWidget::initializeGL()
 {
     initializeOpenGLFunctions();
     glViewport(0,0,width(),height());
-    glClearColor(0.2f, 0.3f,0.3f,1);    
+    glClearColor(0.0f, 0.0f,0.0f,1);
 }
 void GlWidget::paintGL()
 {

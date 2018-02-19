@@ -2,10 +2,10 @@
 #include <QSet>
 #include <QDebug>
 
-const int RippleMesh::mGridX=5;
-const int RippleMesh::mGridZ=5;
+const int RippleMesh::mGridX=50;
+const int RippleMesh::mGridZ=50;
 
-RippleMesh::RippleMesh(QString &_pathVertex,QString &_pathFragment):Object3d()
+RippleMesh::RippleMesh(QString &_pathVertex,QString &_pathFragment,int _w,int _h):Object3d(_w,_h)
 {
     mShader=new GLSLShader(_pathVertex,_pathFragment);
 }
@@ -67,12 +67,21 @@ void RippleMesh::Draw()
 {
     //projection and modelview matrices
     //setup the projection matrix
-    glm::mat4  P = glm::ortho(-1,1,-1,1);
-    glm::mat4 MV = glm::mat4(1);
+    qDebug()<<ScreenWidth<<"-"<<ScreenHeight<<endl;
+//    mOpenGLFunctions->glViewport(0,0,ScreenWidth,ScreenHeight);
+//    glm::mat4  P = glm::perspective(45.0f,(float)ScreenWidth/ScreenHeight,1.0f,1000.f);
+    glm::mat4 model,view;
+    model=glm::scale(model,glm::vec3(15,1,15));
+    model=glm::translate(model,glm::vec3(-0.5,-2,0));
+    model=glm::rotate(model,glm::radians(10.0f),glm::vec3(1,0,0));
+    view=glm::translate(view,glm::vec3(0,0,-7));
+    glm::mat4 perspective=glm::perspective(45.0f,(float)ScreenWidth/ScreenHeight,0.01f,100.0f);
 
     mShader->Use();
     GLint mvpAttrib=mOpenGLFunctions->glGetUniformLocation(mShader->ShaderProgram()->programId(),"MVP");
-    mOpenGLFunctions->glUniformMatrix4fv(mvpAttrib,1,GL_FALSE,glm::value_ptr(P*MV));
+//    GLint timeAttrib=mOpenGLFunctions->glGetUniformLocation(mShader->ShaderProgram()->programId(),"time");
+//    mOpenGLFunctions->glUniform1f(timeAttrib,time);
+    mOpenGLFunctions->glUniformMatrix4fv(mvpAttrib,1,GL_FALSE,glm::value_ptr(perspective*view*model));
     mOpenGLFunctions->glBindVertexArray(mVao);
     mOpenGLFunctions->glDrawElements(GL_TRIANGLES,mGridX*mGridZ*6,GL_UNSIGNED_INT,0);
     mOpenGLFunctions->glBindVertexArray(0);

@@ -57,15 +57,15 @@ void MainWindow::addObject()
     QString pathFragment("../sans_titre/Resources/Shaders/shader.frag");
     QString pathVertex1("../sans_titre/Resources/Shaders/ripple.vert");
     QString pathFragment2("../sans_titre/Resources/Shaders/ripple.frag");
-    Triangle *tri=new Triangle(pathVertex,pathFragment);
-    tri->Bind();
-    mUndoStack->push(new AddObjectCommand(mGlWidget,tri));
+//    Triangle *tri=new Triangle(pathVertex,pathFragment);
+//    tri->Bind();
+//    mUndoStack->push(new AddObjectCommand(mGlWidget,tri));
 
-    plane *plan=new plane(pathVertex,pathFragment);
-    plan->Bind();
-    mUndoStack->push(new AddObjectCommand(mGlWidget,plan));
+//    plane *plan=new plane(pathVertex,pathFragment);
+//    plan->Bind();
+//    mUndoStack->push(new AddObjectCommand(mGlWidget,plan));
 
-    RippleMesh *ripple=new RippleMesh(pathVertex1,pathFragment2);
+    RippleMesh *ripple=new RippleMesh(pathVertex1,pathFragment2,width(),height());
     ripple->Bind();
     mUndoStack->push(new AddObjectCommand(mGlWidget,ripple));
 }

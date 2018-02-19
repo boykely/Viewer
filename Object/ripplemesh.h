@@ -10,7 +10,7 @@
 class RippleMesh:public Object3d
 {
 public:
-    RippleMesh(QString &_pathVertex,QString &_pathFragment);
+    RippleMesh(QString &_pathVertex,QString &_pathFragment,int _w=0,int _h=0);
     void Bind() override;
     void Draw() override;
 
