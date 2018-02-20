@@ -53,10 +53,10 @@ void MainWindow::initMenu()
 
 void MainWindow::addObject()
 {
-    QString pathVertex("../sans_titre/Resources/Shaders/shader.vert");
-    QString pathFragment("../sans_titre/Resources/Shaders/shader.frag");
-    QString pathVertex1("../sans_titre/Resources/Shaders/ripple.vert");
-    QString pathFragment2("../sans_titre/Resources/Shaders/ripple.frag");
+    QString pathVertex("../Resources/Shaders/shader.vert");
+    QString pathFragment("../Resources/Shaders/shader.frag");
+    QString pathVertex1("../Resources/Shaders/ripple.vert");
+    QString pathFragment2("../Resources/Shaders/ripple.frag");
 //    Triangle *tri=new Triangle(pathVertex,pathFragment);
 //    tri->Bind();
 //    mUndoStack->push(new AddObjectCommand(mGlWidget,tri));

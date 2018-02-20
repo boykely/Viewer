@@ -27,16 +27,16 @@ void RippleMesh::Bind()
 
     k=0;
     int vi=0;
-    unsigned int _indices[mGridX*mGridZ*6];
-    for(int j=0;j<mGridZ;j++)
-        for(int i=0;i<mGridX;i++)
+    unsigned int _indices[(mGridX-1)*(mGridZ-1)*6];
+    for(int j=0;j<mGridZ-1;j++)
+        for(int i=0;i<mGridX-1;i++)
         {
-            _indices[k]=vi;
-            _indices[k+1]=mGridX+vi+1;
-            _indices[k+2]=vi+1;
-            _indices[k+3]=mGridX+vi+1;
-            _indices[k+4]=mGridX+vi+2;
-            _indices[k+5]=vi+1;
+            _indices[k]=(vi+j);
+            _indices[k+1]=(mGridX-1)+(vi+j)+1;
+            _indices[k+2]=(vi+j)+1;
+            _indices[k+3]=(mGridX-1)+(vi+j)+1;
+            _indices[k+4]=(mGridX-1)+(vi+j)+2;
+            _indices[k+5]=(vi+j)+1;
             vi++;
             k+=6;
         }
@@ -57,7 +57,7 @@ void RippleMesh::Bind()
         mOpenGLFunctions->glBindBuffer(GL_ARRAY_BUFFER,mVbo);
         mOpenGLFunctions->glBufferData(GL_ARRAY_BUFFER,sizeof(float)*mGridX*mGridZ*3,mVertices,GL_STATIC_DRAW);
         mOpenGLFunctions->glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,mEbo);
-        mOpenGLFunctions->glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(unsigned int)*mGridX*mGridZ*6,mIndices,GL_STATIC_DRAW);
+        mOpenGLFunctions->glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(unsigned int)*(mGridX-1)*(mGridZ-1)*6,mIndices,GL_STATIC_DRAW);
         mOpenGLFunctions->glEnableVertexAttribArray(0);
         mOpenGLFunctions->glVertexAttribPointer(0,3,GL_FLOAT,GL_FALSE,3*sizeof(float),(void*)0);
     mOpenGLFunctions->glBindVertexArray(0);
@@ -67,14 +67,14 @@ void RippleMesh::Draw()
 {
     //projection and modelview matrices
     //setup the projection matrix
-    qDebug()<<ScreenWidth<<"-"<<ScreenHeight<<endl;
+//    qDebug()<<ScreenWidth<<"-"<<ScreenHeight<<endl;
 //    mOpenGLFunctions->glViewport(0,0,ScreenWidth,ScreenHeight);
 //    glm::mat4  P = glm::perspective(45.0f,(float)ScreenWidth/ScreenHeight,1.0f,1000.f);
     glm::mat4 model,view;
     model=glm::scale(model,glm::vec3(15,1,15));
     model=glm::translate(model,glm::vec3(-0.5,-2,0));
     model=glm::rotate(model,glm::radians(10.0f),glm::vec3(1,0,0));
-    view=glm::translate(view,glm::vec3(0,0,-20));
+    view=glm::translate(view,glm::vec3(0,-2.5,-23));
     glm::mat4 perspective=glm::perspective(45.0f,(float)ScreenWidth/ScreenHeight,0.01f,100.0f);
     float time=100.0f;
 
@@ -86,6 +86,6 @@ void RippleMesh::Draw()
     mOpenGLFunctions->glUniformMatrix4fv(mvpAttrib,1,GL_FALSE,glm::value_ptr(perspective*view*model));
 
     mOpenGLFunctions->glBindVertexArray(mVao);
-    mOpenGLFunctions->glDrawElements(GL_TRIANGLES,mGridX*mGridZ*6,GL_UNSIGNED_INT,0);
+    mOpenGLFunctions->glDrawElements(GL_TRIANGLES,(mGridX-1)*(mGridZ-1)*6,GL_UNSIGNED_INT,0);
     mOpenGLFunctions->glBindVertexArray(0);
 }
