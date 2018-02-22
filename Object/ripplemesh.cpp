@@ -71,11 +71,13 @@ void RippleMesh::Draw()
 //    mOpenGLFunctions->glViewport(0,0,ScreenWidth,ScreenHeight);
 //    glm::mat4  P = glm::perspective(45.0f,(float)ScreenWidth/ScreenHeight,1.0f,1000.f);
     glm::mat4 model,view;
+    model=glm::rotate(model,glm::radians(0.0f),glm::vec3(1,0,0));
+    model=glm::translate(model,glm::vec3(-5,0,0));
     model=glm::scale(model,glm::vec3(15,1,15));
-    model=glm::translate(model,glm::vec3(-0.5,-2,0));
-    model=glm::rotate(model,glm::radians(10.0f),glm::vec3(1,0,0));
+
     view=glm::translate(view,glm::vec3(0,-2.5,-23));
-    glm::mat4 perspective=glm::perspective(45.0f,(float)ScreenWidth/ScreenHeight,0.01f,100.0f);
+//    glm::mat4 perspective=glm::perspective(45.0f,(float)ScreenWidth/ScreenHeight,0.01f,100.0f);
+    glm::mat4 perspective=glm::perspective(45.0f,(float)1080/720,0.01f,100.0f);
     float time=100.0f;
 
     mShader->Use();

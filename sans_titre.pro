@@ -35,7 +35,8 @@ SOURCES += \
     Object/object3d.cpp \
     addobjectcommand.cpp \
     transformobjectcommand.cpp \
-    removeobjectcommand.cpp
+    removeobjectcommand.cpp \
+    camera.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -48,7 +49,8 @@ HEADERS += \
     Object/object3d.h \
     addobjectcommand.h \
     transformobjectcommand.h \
-    removeobjectcommand.h
+    removeobjectcommand.h \
+    camera.h
 
 win32: LIBS += -L$$PWD/Lib/soil/lib/ -llibSOIL
 

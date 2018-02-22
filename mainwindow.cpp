@@ -35,8 +35,9 @@ void MainWindow::showMaximized()
 void MainWindow::show()
 {
     QRect geometryWindow=QApplication::desktop()->geometry();
-    setFixedSize(geometryWindow.width(),(geometryWindow.height()/2));
-    QMainWindow::show();
+//    setFixedSize(geometryWindow.width(),(geometryWindow.height()/2));
+//    QMainWindow::show();
+    QMainWindow::showMaximized();
     setWindowTitle("Learn OpenGL - "+mGlWidget->GlGetVersion());
     addObject();
 }

@@ -4,6 +4,7 @@
 #include<QOpenGLWidget>
 #include<QOpenGLFunctions_4_5_Core>
 #include "Object/object3d.h"
+#include "camera.h"
 #include <QList>
 
 
@@ -24,6 +25,7 @@ protected:
     void paintGL() override;
 private:
     QList<Object3d *> *mObjects;
+    Camera *mCam;
 };
 
 #endif // GLWIDGET_H
