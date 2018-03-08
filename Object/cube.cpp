@@ -92,16 +92,16 @@ void Cube::Bind()
     mOpenGLFunctions->glBindVertexArray(0);
 }
 
-void Cube::Draw()
+void Cube::Draw(Camera *_cam)
 {
     mOpenGLFunctions->glPolygonMode(GL_FRONT_AND_BACK,GL_FILL);
 
-    glm::mat4 model,view;
+    glm::mat4 model;
     model=glm::rotate(model,glm::radians(40.0f),glm::vec3(0,1,0));
     model=glm::translate(model,glm::vec3(0,0,0));
     model=glm::scale(model,glm::vec3(5,5,5));
 
-    view=glm::translate(view,glm::vec3(0,-5,-40));
+    glm::mat4 view=_cam->View;
 //    glm::mat4 perspective=glm::perspective(45.0f,(float)ScreenWidth/ScreenHeight,0.01f,100.0f);
     glm::mat4 perspective=glm::perspective(45.0f,(float)1080/720,0.01f,100.0f);
     float time=100.0f;

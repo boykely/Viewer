@@ -10,7 +10,7 @@ class Plane:public Object3d
 public:
     Plane(QString &_pathVertex,QString &_pathFragment,bool circle=false,int _w=0,int _h=0);
     void Bind() override;
-    void Draw() override;
+    void Draw(Camera *) override;
 
 private:
     const static int mGridX;

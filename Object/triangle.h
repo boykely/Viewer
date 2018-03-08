@@ -8,7 +8,7 @@ class Triangle:public Object3d
 public:
     Triangle(QString &_pathVertex,QString &_pathFragment);
     void Bind() override;
-    void Draw() override;
+    void Draw(Camera *) override;
 private:
     GLuint mVbo;
     GLuint mVbo2;

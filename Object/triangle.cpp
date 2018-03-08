@@ -60,7 +60,7 @@ void Triangle::Bind()
     mOpenGLFunctions->glBindVertexArray(0);
 }
 
-void Triangle::Draw()
+void Triangle::Draw(Camera *_cam)
 {
     //projection and modelview matrices
     //setup the projection matrix

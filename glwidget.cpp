@@ -12,6 +12,7 @@ GlWidget::GlWidget(QWidget *parent):QOpenGLWidget(parent)
     format.setProfile(QSurfaceFormat::CoreProfile);
     setFormat(format);
     mObjects=new QList<Object3d *>();
+    mCam = new Camera(glm::vec3(0,10,-25));
 }
 GlWidget::~GlWidget()
 {
@@ -29,7 +30,7 @@ void GlWidget::paintGL()
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     for(int i=0;i<mObjects->count();i++)
     {
-        mObjects->at(i)->Draw();
+        mObjects->at(i)->Draw(mCam);
     }
 
 }

@@ -94,7 +94,7 @@ void Plane::Bind()
     mOpenGLFunctions->glBindVertexArray(0);
 }
 
-void Plane::Draw()
+void Plane::Draw(Camera *_cam)
 {
     mOpenGLFunctions->glPolygonMode(GL_FRONT_AND_BACK,GL_FILL);
     //projection and modelview matrices
@@ -102,12 +102,12 @@ void Plane::Draw()
 //    qDebug()<<ScreenWidth<<"-"<<ScreenHeight<<endl;
 //    mOpenGLFunctions->glViewport(0,0,ScreenWidth,ScreenHeight);
 //    glm::mat4  P = glm::perspective(45.0f,(float)ScreenWidth/ScreenHeight,1.0f,1000.f);
-    glm::mat4 model,view;
+    glm::mat4 model;
     model=glm::rotate(model,glm::radians(0.0f),glm::vec3(1,0,0));
     model=glm::translate(model,glm::vec3(0,0,0));
     model=glm::scale(model,glm::vec3(15,1,15));
 
-    view=glm::translate(view,glm::vec3(0,-2.5,-23));
+    glm::mat4 view=_cam->View;
 //    glm::mat4 perspective=glm::perspective(45.0f,(float)ScreenWidth/ScreenHeight,0.01f,100.0f);
     glm::mat4 perspective=glm::perspective(45.0f,(float)1080/720,0.01f,100.0f);
 
