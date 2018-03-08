@@ -1,8 +1,6 @@
 #ifndef TRIANGLE_H
 #define TRIANGLE_H
 
-#include <QOpenGLFunctions>
-#include "GlShader/GLSLShader.h"
 #include "Object/object3d.h"
 
 class Triangle:public Object3d
@@ -12,8 +10,8 @@ public:
     void Bind() override;
     void Draw() override;
 private:
-    float *mVertices;
-    float *mColors;
+    float *mVerticesTemps;
+    float *mColorsTemps;
     GLuint mVbo;
     GLuint mVbo2;
     GLuint mVao;

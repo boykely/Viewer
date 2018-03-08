@@ -4,6 +4,8 @@
 #include <glm.hpp>
 #include <gtc/matrix_transform.hpp>
 #include <gtc/type_ptr.hpp>
+#include <QOpenGLFunctions>
+#include "GlShader/GLSLShader.h"
 
 class Object3d
 {
@@ -16,6 +18,11 @@ public:
     int Id;
     int ScreenWidth;
     int ScreenHeight;
+protected:
+    QVector<float> mVertices;
+    QVector<unsigned int> mIndices;
+    QVector<float> mColors;
+    QVector<unsigned int> mTexId;
 };
 
 #endif // OBJECT3D_H

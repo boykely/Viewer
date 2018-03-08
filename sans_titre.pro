@@ -30,13 +30,13 @@ SOURCES += \
     glwidget.cpp \
     GlShader/GLSLShader.cpp \
     Object/triangle.cpp \
-    Object/plane.cpp \
     Object/ripplemesh.cpp \
     Object/object3d.cpp \
     addobjectcommand.cpp \
     transformobjectcommand.cpp \
     removeobjectcommand.cpp \
-    camera.cpp
+    camera.cpp \
+    Object/cube.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -44,13 +44,13 @@ HEADERS += \
     mainwindow.h \
     GlShader/GLSLShader.h \
     Object/triangle.h \
-    Object/plane.h \
     Object/ripplemesh.h \
     Object/object3d.h \
     addobjectcommand.h \
     transformobjectcommand.h \
     removeobjectcommand.h \
-    camera.h
+    camera.h \
+    Object/cube.h
 
 win32: LIBS += -L$$PWD/Lib/soil/lib/ -llibSOIL
 

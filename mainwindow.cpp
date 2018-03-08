@@ -7,6 +7,7 @@
 #include "Object/triangle.h"
 #include "Object/plane.h"
 #include "Object/ripplemesh.h"
+#include "Object/cube.h"
 #include "addobjectcommand.h"
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -54,10 +55,8 @@ void MainWindow::initMenu()
 
 void MainWindow::addObject()
 {
-    QString pathVertex("../Resources/Shaders/shader.vert");
-    QString pathFragment("../Resources/Shaders/shader.frag");
-    QString pathVertex1("../Resources/Shaders/ripple.vert");
-    QString pathFragment2("../Resources/Shaders/ripple.frag");
+    QString pathVertex1("../Resources/Shaders/shader.vert");
+    QString pathFragment2("../Resources/Shaders/shader.frag");
 //    Triangle *tri=new Triangle(pathVertex,pathFragment);
 //    tri->Bind();
 //    mUndoStack->push(new AddObjectCommand(mGlWidget,tri));
@@ -69,4 +68,8 @@ void MainWindow::addObject()
     RippleMesh *ripple=new RippleMesh(pathVertex1,pathFragment2,width(),height());
     ripple->Bind();
     mUndoStack->push(new AddObjectCommand(mGlWidget,ripple));
+
+//    Cube *cb=new Cube(pathVertex1,pathFragment2,width(),height());
+//    cb->Bind();
+//    mUndoStack->push(new AddObjectCommand(mGlWidget,cb));
 }

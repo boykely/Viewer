@@ -1,6 +1,6 @@
 #include "camera.h"
 
-Camera::Camera()
+Camera::Camera(glm::vec3 _origin):Origin(_origin)
 {
 
 }

@@ -2,7 +2,9 @@
 
 layout (location = 0) out vec4 glFragColor;
 
+in vec4 gl_Color;
+
 void main()
 {
-    glFragColor=vec4(0,1,0,1);
+    glFragColor=gl_Color;
 }

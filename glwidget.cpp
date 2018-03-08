@@ -22,7 +22,7 @@ void GlWidget::initializeGL()
     initializeOpenGLFunctions();
     glViewport(0,0,width(),height());
     glClearColor(0.0f, 0.0f,0.0f,1);
-    glPolygonMode(GL_FRONT_AND_BACK,GL_LINE);
+    glEnable(GL_DEPTH_TEST);
 }
 void GlWidget::paintGL()
 {

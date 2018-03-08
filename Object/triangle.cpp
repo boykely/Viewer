@@ -30,8 +30,8 @@ void Triangle::Bind()
         0,0,1
     };
 
-    mVertices=&_vertices[0];
-    mColors=&_colors[0];
+    mVerticesTemps=&_vertices[0];
+    mColorsTemps=&_colors[0];
 
     mOpenGLFunctions=QOpenGLContext::currentContext()->versionFunctions<QOpenGLFunctions_4_5_Core>();
     mShader->CreateAndCompileShader();
@@ -45,13 +45,13 @@ void Triangle::Bind()
     mOpenGLFunctions->glBindVertexArray(mVao);
         //Use VBO for VAO
         mOpenGLFunctions->glBindBuffer(GL_ARRAY_BUFFER,mVbo);
-        mOpenGLFunctions->glBufferData(GL_ARRAY_BUFFER,sizeof(float)*9,mVertices,GL_STATIC_DRAW);
+        mOpenGLFunctions->glBufferData(GL_ARRAY_BUFFER,sizeof(float)*9,mVerticesTemps,GL_STATIC_DRAW);
         mOpenGLFunctions->glEnableVertexAttribArray(0);
         mOpenGLFunctions->glVertexAttribPointer(0,3,GL_FLOAT,GL_FALSE,3*sizeof(float),(void*)0);
 
         //Use VBO2 for VAO
         mOpenGLFunctions->glBindBuffer(GL_ARRAY_BUFFER,mVbo2);
-        mOpenGLFunctions->glBufferData(GL_ARRAY_BUFFER,sizeof(float)*9,mColors,GL_STATIC_DRAW);
+        mOpenGLFunctions->glBufferData(GL_ARRAY_BUFFER,sizeof(float)*9,mColorsTemps,GL_STATIC_DRAW);
         mOpenGLFunctions->glEnableVertexAttribArray(1);
         mOpenGLFunctions->glVertexAttribPointer(1,3,GL_FLOAT,GL_FALSE,3*sizeof(float),(void*)0);
 

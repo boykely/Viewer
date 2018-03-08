@@ -1,9 +1,7 @@
 #ifndef RIPPLEMESH_H
 #define RIPPLEMESH_H
 
-#include <QOpenGLFunctions>
 #include "object3d.h"
-#include "GlShader/GLSLShader.h"
 
 //A planar grid
 
@@ -17,8 +15,6 @@ public:
 private:
     const static int mGridX;
     const static int mGridZ;
-    float *mVertices;
-    unsigned int *mIndices;
     GLuint mVbo;
     GLuint mEbo;
     GLuint mVao;
