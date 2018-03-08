@@ -7,7 +7,7 @@ Cube::Cube(QString &_pathVertex,QString &_pathFragment,int _w,int _h):Object3d(_
 
 void Cube::Bind()
 {
-    //Construct vertex data
+    //Construct vertex data    
     float _vertices[]={
         // front
             -1.0, -1.0,  1.0,
@@ -21,7 +21,8 @@ void Cube::Bind()
             -1.0,  1.0, -1.0,
     };
 
-    mVerticesTEmp=&_vertices[0];
+    for(int i=0;i<24;i++)
+        mVertices.append(_vertices[i]);
 
     unsigned int _indices[]={
         // front
@@ -44,7 +45,8 @@ void Cube::Bind()
                 6, 7, 3,
     };
 
-    mIndicesTemp=&_indices[0];
+    for(int i=0;i<36;i++)
+        mIndices.append(_indices[i]);
 
     float _colors[]={
         // front colors
@@ -59,7 +61,8 @@ void Cube::Bind()
            1.0, 1.0, 1.0,
     };
 
-    mVerticesColor=&_colors[0];
+    for(int i=0;i<24;i++)
+        mColors.append(_colors[i]);
 
     mOpenGLFunctions=QOpenGLContext::currentContext()->versionFunctions<QOpenGLFunctions_4_5_Core>();
     mShader->CreateAndCompileShader();
@@ -76,14 +79,14 @@ void Cube::Bind()
     mOpenGLFunctions->glBindVertexArray(mVao);
         //Use VBO vertex, VBO colors and EBO for VAO
         mOpenGLFunctions->glBindBuffer(GL_ARRAY_BUFFER,mVbo);
-        mOpenGLFunctions->glBufferData(GL_ARRAY_BUFFER,sizeof(float)*24,mVerticesTEmp,GL_STATIC_DRAW);
+        mOpenGLFunctions->glBufferData(GL_ARRAY_BUFFER,sizeof(float)*mVertices.count(),&mVertices.front(),GL_STATIC_DRAW);
         mOpenGLFunctions->glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,mEbo);
-        mOpenGLFunctions->glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(unsigned int)*36,mIndicesTemp,GL_STATIC_DRAW);
+        mOpenGLFunctions->glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(unsigned int)*mIndices.count(),&mIndices.front(),GL_STATIC_DRAW);
         mOpenGLFunctions->glEnableVertexAttribArray(0);
         mOpenGLFunctions->glVertexAttribPointer(0,3,GL_FLOAT,GL_FALSE,3*sizeof(float),(void*)0);
 
         mOpenGLFunctions->glBindBuffer(GL_ARRAY_BUFFER,mVboColor);
-        mOpenGLFunctions->glBufferData(GL_ARRAY_BUFFER,sizeof(float)*24,mVerticesTEmp,GL_STATIC_DRAW);
+        mOpenGLFunctions->glBufferData(GL_ARRAY_BUFFER,sizeof(float)*mColors.count(),&mColors.front(),GL_STATIC_DRAW);
         mOpenGLFunctions->glEnableVertexAttribArray(1);
         mOpenGLFunctions->glVertexAttribPointer(1,3,GL_FLOAT,GL_FALSE,3*sizeof(float),(void*)0);
     mOpenGLFunctions->glBindVertexArray(0);

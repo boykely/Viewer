@@ -1,26 +1,27 @@
-#ifndef PLANE_H
-#define PLANE_H
+#ifndef RIPPLEMESH_H
+#define RIPPLEMESH_H
 
-#include <QOpenGLFunctions>
-#include "GlShader/GLSLShader.h"
-#include "Object/object3d.h"
+#include "object3d.h"
 
-class plane:public Object3d
+//A planar grid
+
+class Plane:public Object3d
 {
 public:
-    plane(QString &_pathVertex,QString &_pathFragment);
+    Plane(QString &_pathVertex,QString &_pathFragment,bool circle=false,int _w=0,int _h=0);
     void Bind() override;
     void Draw() override;
+
 private:
-    float *mVertices;
-    float *mColors;
-    unsigned int *mIndices;
+    const static int mGridX;
+    const static int mGridZ;
     GLuint mVbo;
-    GLuint mVbo2;
     GLuint mEbo;
     GLuint mVao;
     QOpenGLFunctions_4_5_Core *mOpenGLFunctions;
     GLSLShader *mShader;
+
+    bool isCircle;
 };
 
-#endif // PLANE_H
+#endif // RIPPLEMESH_H

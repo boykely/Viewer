@@ -10,9 +10,6 @@ public:
     void Bind() override;
     void Draw() override;
 private:
-    float *mVerticesTEmp;
-    float *mVerticesColor;
-    unsigned int *mIndicesTemp;
 
     GLuint mVbo;
     GLuint mVboColor;

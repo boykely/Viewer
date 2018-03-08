@@ -10,8 +10,6 @@ public:
     void Bind() override;
     void Draw() override;
 private:
-    float *mVerticesTemps;
-    float *mColorsTemps;
     GLuint mVbo;
     GLuint mVbo2;
     GLuint mVao;
