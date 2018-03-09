@@ -12,7 +12,7 @@ GlWidget::GlWidget(QWidget *parent):QOpenGLWidget(parent)
     format.setProfile(QSurfaceFormat::CoreProfile);
     setFormat(format);
     mObjects=new QList<Object3d *>();
-    mCam = new Camera(glm::vec3(0,10,-25));
+    mCam = new Camera(width(),height(),glm::vec3(0,10,-25));
 }
 GlWidget::~GlWidget()
 {
@@ -59,5 +59,12 @@ void GlWidget::Remove(Object3d *_obj)
         if(_obj->Id==mObjects->at(i)->Id)
             mObjects->removeAt(i);
     }
+}
+
+void GlWidget::wheelEvent(QWheelEvent *event)
+{
+    if(mCam!=nullptr)
+        mCam->wheelEvent(event);
+    update();
 }
 

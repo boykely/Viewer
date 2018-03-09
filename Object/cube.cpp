@@ -102,8 +102,7 @@ void Cube::Draw(Camera *_cam)
     model=glm::scale(model,glm::vec3(5,5,5));
 
     glm::mat4 view=_cam->View;
-//    glm::mat4 perspective=glm::perspective(45.0f,(float)ScreenWidth/ScreenHeight,0.01f,100.0f);
-    glm::mat4 perspective=glm::perspective(45.0f,(float)1080/720,0.01f,100.0f);
+    glm::mat4 perspective=_cam->Projection;//glm::perspective(45.0f,(float)1080/720,0.01f,100.0f);
     float time=100.0f;
 
     mShader->Use();

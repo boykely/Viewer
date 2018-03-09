@@ -23,6 +23,7 @@ public:
 protected:
     void initializeGL() override;
     void paintGL() override;
+    void wheelEvent(QWheelEvent *event) override;
 private:
     QList<Object3d *> *mObjects;
     Camera *mCam;

@@ -109,7 +109,7 @@ void Plane::Draw(Camera *_cam)
 
     glm::mat4 view=_cam->View;
 //    glm::mat4 perspective=glm::perspective(45.0f,(float)ScreenWidth/ScreenHeight,0.01f,100.0f);
-    glm::mat4 perspective=glm::perspective(45.0f,(float)1080/720,0.01f,100.0f);
+    glm::mat4 perspective=_cam->Projection;//glm::perspective(45.0f,(float)1080/720,0.01f,100.0f);
 
     mShader->Use();
     GLint mvpAttrib=mOpenGLFunctions->glGetUniformLocation(mShader->ShaderProgram()->programId(),"MVP");
