@@ -24,9 +24,12 @@ protected:
     void initializeGL() override;
     void paintGL() override;
     void wheelEvent(QWheelEvent *event) override;
+    void mouseMoveEvent(QMouseEvent *event) override;
+    void mousePressEvent(QMouseEvent *event) override;
+    void mouseReleaseEvent(QMouseEvent *event) override;
 private:
     QList<Object3d *> *mObjects;
-    Camera *mCam;
+    Camera *mCam = nullptr;
 };
 
 #endif // GLWIDGET_H

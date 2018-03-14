@@ -4,6 +4,7 @@
 #include <glm.hpp>
 #include <gtc/matrix_transform.hpp>
 #include <QWheelEvent>
+#include <QMouseEvent>
 
 class Camera
 {
@@ -18,10 +19,17 @@ public:
     glm::mat4 Projection;
     void Zoom(float step);
     void wheelEvent(QWheelEvent *event);
+    void mouseMoveEvent(QMouseEvent *event);
+    void mousePressEvent(QMouseEvent *event);
+    void mouseReleaseEvent(QMouseEvent *event);
 private:
     float mFov;
+    float mPitch;
+    float mYaw;
     int mWidth;
     int mHeight;
+    bool mMouseLeftPressed = false;
+    QPoint mWidgetMousePosition;
 };
 
 #endif // CAMERA_H

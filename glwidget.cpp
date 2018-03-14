@@ -11,6 +11,7 @@ GlWidget::GlWidget(QWidget *parent):QOpenGLWidget(parent)
     format.setVersion(4,5);
     format.setProfile(QSurfaceFormat::CoreProfile);
     setFormat(format);
+    setMouseTracking(true);
     mObjects=new QList<Object3d *>();
     mCam = new Camera(width(),height(),glm::vec3(0,10,-25));
 }
@@ -66,5 +67,24 @@ void GlWidget::wheelEvent(QWheelEvent *event)
     if(mCam!=nullptr)
         mCam->wheelEvent(event);
     update();
+}
+
+void GlWidget::mouseMoveEvent(QMouseEvent *event)
+{
+    if(mCam!=nullptr)
+        mCam->mouseMoveEvent(event);
+    update();
+}
+
+void GlWidget::mousePressEvent(QMouseEvent *event)
+{
+    if(mCam!=nullptr)
+        mCam->mousePressEvent(event);
+}
+
+void GlWidget::mouseReleaseEvent(QMouseEvent *event)
+{
+    if(mCam!=nullptr)
+        mCam->mouseReleaseEvent(event);
 }
 
