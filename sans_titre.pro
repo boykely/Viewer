@@ -37,7 +37,8 @@ SOURCES += \
     removeobjectcommand.cpp \
     camera.cpp \
     Object/cube.cpp \
-    Common/time.cpp
+    Common/time.cpp \
+    Common/commons.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -52,7 +53,8 @@ HEADERS += \
     camera.h \
     Object/cube.h \
     Object/plane.h \
-    Common/time.h
+    Common/time.h \
+    Common/commons.h
 
 win32: LIBS += -L$$PWD/Lib/soil/lib/ -llibSOIL
 

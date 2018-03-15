@@ -19,11 +19,12 @@ public:
     int Id;
     int ScreenWidth;
     int ScreenHeight;
+    glm::mat4 Model;
 protected:
     QVector<float> mVertices;
     QVector<unsigned int> mIndices;
     QVector<float> mColors;
-    QVector<unsigned int> mTexId;
+    QVector<unsigned int> mTexId;    
 };
 
 #endif // OBJECT3D_H

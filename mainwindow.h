@@ -23,6 +23,7 @@ public:
 public slots:
     void showMaximized();
     void show();
+    void import3dFileDialog(bool checked=false);
 
 private:
     GlWidget *mGlWidget;

@@ -4,10 +4,12 @@
 #include <QApplication>
 #include <QDesktopWidget>
 #include <QRect>
+#include <QFileDialog>
 #include "Object/triangle.h"
 #include "Object/plane.h"
 #include "Object/cube.h"
 #include "addobjectcommand.h"
+#include "Common/commons.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent)
@@ -48,29 +50,43 @@ void MainWindow::initMenu()
     mEditMenu=menuBar()->addMenu("Edit");
     mUndoAction=mUndoStack->createUndoAction(this,"Undo");
     mRedoAction=mUndoStack->createRedoAction(this,"Redo");
+    //Edit menu
     mEditMenu->addAction(mUndoAction);
     mEditMenu->addAction(mRedoAction);
+    //File menu
+    QAction *importAction=mFileMenu->addAction("Import 3D file");
+    QAction *exportAction=mFileMenu->addAction("Export");
+    QAction *quitAction=mFileMenu->addAction("Quit");
+
+    connect(importAction,SIGNAL(triggered(bool)),this,SLOT(import3dFileDialog(bool)));
 }
 
 void MainWindow::addObject()
 {
-    QString pathVertex1("../Resources/Shaders/shader.vert");
-    QString pathFragment1("../Resources/Shaders/shader.frag");
     QString pathVertex2("../Resources/Shaders/ripple.vert");
     QString pathFragment2("../Resources/Shaders/ripple.frag");
-//    Triangle *tri=new Triangle(pathVertex,pathFragment);
-//    tri->Bind();
-//    mUndoStack->push(new AddObjectCommand(mGlWidget,tri));
-
-//    plane *plan=new plane(pathVertex,pathFragment);
-//    plan->Bind();
-//    mUndoStack->push(new AddObjectCommand(mGlWidget,plan));
-
-    Plane *ripple=new Plane(pathVertex1,pathFragment1,true,width(),height());
-    ripple->Bind();
-    mUndoStack->push(new AddObjectCommand(mGlWidget,ripple));
 
     Cube *cb=new Cube(pathVertex2,pathFragment2,width(),height());
     cb->Bind();
+    glm::mat4 cbModel;
+    cbModel=glm::rotate(cbModel,glm::radians(40.0f),glm::vec3(0,1,0));
+    cbModel=glm::translate(cbModel,glm::vec3(0,0,0));
+    cbModel=glm::scale(cbModel,glm::vec3(5,5,5));
+    cb->Model=cbModel;
     mUndoStack->push(new AddObjectCommand(mGlWidget,cb));
+
+    Cube *cb2=new Cube(pathVertex2,pathFragment2,width(),height());
+    cb2->Bind();
+    glm::mat4 cbModel2;
+    cbModel2=glm::rotate(cbModel2,glm::radians(40.0f),glm::vec3(0,1,0));
+    cbModel2=glm::translate(cbModel2,glm::vec3(0,5,-10));
+    cbModel2=glm::scale(cbModel2,glm::vec3(5,5,5));
+    cb2->Model=cbModel2;
+    mUndoStack->push(new AddObjectCommand(mGlWidget,cb2));
+}
+
+void MainWindow::import3dFileDialog(bool checked)
+{
+    QString fileName=QFileDialog::getOpenFileName(this,"Import 3d file",Commons::DesktopDir(),
+                                                  "Obj file (*.obj);;Stl file (*.stl);;Fpbx file (*.fpbx)");
 }
