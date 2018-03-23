@@ -13,8 +13,8 @@ Camera::Camera(int _width,int _height,glm::vec3 _origin,glm::vec3 _target):Origi
     View=glm::lookAt(Origin,Target,_up);
     mFov=45.0f;
     Projection=glm::perspective(glm::radians(mFov),(float)mWidth/mHeight,0.01f,100.0f);
-    mYaw=15.0f;
-    mPitch=15.0f;
+    mYaw=-0.0f;
+    mPitch=0.0f;
 }
 
 void Camera::wheelEvent(QWheelEvent *event)
@@ -38,28 +38,29 @@ void Camera::mouseMoveEvent(QMouseEvent *event)
         QPoint current=event->pos();
         mWidgetMousePosition-=current;
 //        qDebug()<<mWidgetMousePosition;
-        float sensitivity=2.0f;
-        int x=mWidgetMousePosition.x()<0?1:-1;
-        int y=mWidgetMousePosition.y()<0?-1:1;
+        float sensitivity=0.1f;
+        int x=mWidgetMousePosition.x();
+        int y=mWidgetMousePosition.y();
         float xoffset=x*sensitivity;
         float yoffset=y*sensitivity;
         mYaw+=xoffset;
         mPitch+=yoffset;
 //        qDebug()<<mYaw<<"//"<<mPitch;
 
-//        if(mPitch>80.0f)
-//            mPitch=80.0f;
-//        if(mPitch<-80.0f)
-//            mPitch=-80.0f;
+        if(mPitch>89.0f)
+            mPitch=89.0f;
+        if(mPitch<-89.0f)
+            mPitch=-89.0f;
 
         glm::vec3 front;
-        float length=glm::length(Target-Origin);
-        front.x=sin(glm::radians(mYaw))*length;
-        front.y=Origin.y;
-        front.z=cos(glm::radians(mYaw))*length;
+        front.x=cos(glm::radians(mPitch))*cos(glm::radians(mYaw));
+        front.y=sin(glm::radians(mPitch));
+        front.z=cos(glm::radians(mPitch))*sin(glm::radians(mYaw));
 
+        Target=glm::normalize(front);
         glm::vec3 _up=glm::vec3(0,1,0);
-        View=glm::lookAt(front,Target,_up);
+        Projection=glm::perspective(glm::radians(mFov),(float)mWidth/mHeight,0.01f,100.0f);
+        View=glm::lookAt(Origin,Origin+Target,_up);
 
 //        Origin=front;
 
