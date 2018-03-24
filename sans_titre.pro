@@ -23,6 +23,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 INCLUDEPATH+=Lib/glm/glm/
+INCLUDEPATH+=Widgets/
 
 SOURCES += \
         main.cpp \
@@ -38,7 +39,8 @@ SOURCES += \
     camera.cpp \
     Object/cube.cpp \
     Common/time.cpp \
-    Common/commons.cpp
+    Common/commons.cpp \
+    Widgets/treeview.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -54,7 +56,8 @@ HEADERS += \
     Object/cube.h \
     Object/plane.h \
     Common/time.h \
-    Common/commons.h
+    Common/commons.h \
+    Widgets/treeview.h
 
 win32: LIBS += -L$$PWD/Lib/soil/lib/ -llibSOIL
 

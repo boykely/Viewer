@@ -3,11 +3,11 @@
 
 #include <QMainWindow>
 #include <QLayout>
-#include<QPushButton>
 #include <QMenu>
 #include<QMenuBar>
 #include <QAction>
 #include <QUndoStack>
+#include "treeview.h"
 
 class GlWidget;
 
