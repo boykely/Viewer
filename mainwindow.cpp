@@ -10,6 +10,7 @@
 #include "Object/cube.h"
 #include "addobjectcommand.h"
 #include "Common/commons.h"
+#include <QPushButton>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent)
@@ -71,7 +72,7 @@ void MainWindow::addObject()
     glm::mat4 cbModel;
     cbModel=glm::rotate(cbModel,glm::radians(40.0f),glm::vec3(0,1,0));
     cbModel=glm::translate(cbModel,glm::vec3(0,0,0));
-    cbModel=glm::scale(cbModel,glm::vec3(5,5,5));
+    cbModel=glm::scale(cbModel,glm::vec3(1,1,1));
     cb->Model=cbModel;
     mUndoStack->push(new AddObjectCommand(mGlWidget,cb));
 
@@ -79,8 +80,8 @@ void MainWindow::addObject()
     cb2->Bind();
     glm::mat4 cbModel2;
     cbModel2=glm::rotate(cbModel2,glm::radians(40.0f),glm::vec3(0,1,0));
-    cbModel2=glm::translate(cbModel2,glm::vec3(0,5,-10));
-    cbModel2=glm::scale(cbModel2,glm::vec3(5,5,5));
+    cbModel2=glm::translate(cbModel2,glm::vec3(0,5,10));
+    cbModel2=glm::scale(cbModel2,glm::vec3(1,1,1));
     cb2->Model=cbModel2;
     mUndoStack->push(new AddObjectCommand(mGlWidget,cb2));
 }

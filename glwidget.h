@@ -20,6 +20,8 @@ public:
     ~GlWidget();
 
     static int ObjectsCount;
+    Camera *cam() const;
+
 protected:
     void initializeGL() override;
     void paintGL() override;

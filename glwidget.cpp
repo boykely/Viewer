@@ -13,7 +13,7 @@ GlWidget::GlWidget(QWidget *parent):QOpenGLWidget(parent)
     setFormat(format);
     setMouseTracking(true);
     mObjects=new QList<Object3d *>();
-    mCam = new Camera(width(),height(),glm::vec3(0,10,-25));
+    mCam = new Camera(width(),height(),glm::vec3(0,5,-15));
 }
 GlWidget::~GlWidget()
 {
@@ -86,5 +86,10 @@ void GlWidget::mouseReleaseEvent(QMouseEvent *event)
 {
     if(mCam!=nullptr)
         mCam->mouseReleaseEvent(event);
+}
+
+Camera *GlWidget::cam() const
+{
+    return mCam;
 }
 

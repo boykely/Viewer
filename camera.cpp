@@ -9,12 +9,12 @@ Camera::Camera(int _width,int _height,glm::vec3 _origin,glm::vec3 _target):Origi
     Right=glm::normalize(glm::cross(_up,Direction));
     Up=glm::cross(Right,Direction);
     //To construct own View matrix from Righ,Up,Direction
-    //Visit learnopengl.com/Getting-started/Camera
+    //Visit learnopengl.com/Getting-started/Camera    
+    mFov=45.0f;    
+    mYaw=-270.0f;
+    mPitch=-18.0f;
     View=glm::lookAt(Origin,Target,_up);
-    mFov=45.0f;
-    Projection=glm::perspective(glm::radians(mFov),(float)mWidth/mHeight,0.01f,100.0f);
-    mYaw=-0.0f;
-    mPitch=0.0f;
+    Projection=glm::perspective(glm::radians(mFov),(float)mWidth/mHeight,0.01f,1000.0f);
 }
 
 void Camera::wheelEvent(QWheelEvent *event)
@@ -45,13 +45,16 @@ void Camera::mouseMoveEvent(QMouseEvent *event)
         float yoffset=y*sensitivity;
         mYaw+=xoffset;
         mPitch+=yoffset;
-//        qDebug()<<mYaw<<"//"<<mPitch;
+        qDebug()<<mYaw<<"//"<<mPitch;
 
         if(mPitch>89.0f)
             mPitch=89.0f;
         if(mPitch<-89.0f)
             mPitch=-89.0f;
+        if(mYaw>=360.0f || mYaw<=-360.0f)
+            mYaw=0.0f;
 
+        float distance=glm::length(Origin-Target);
         glm::vec3 front;
         front.x=cos(glm::radians(mPitch))*cos(glm::radians(mYaw));
         front.y=sin(glm::radians(mPitch));
@@ -59,8 +62,9 @@ void Camera::mouseMoveEvent(QMouseEvent *event)
 
         Target=glm::normalize(front);
         glm::vec3 _up=glm::vec3(0,1,0);
-        Projection=glm::perspective(glm::radians(mFov),(float)mWidth/mHeight,0.01f,100.0f);
+        Projection=glm::perspective(glm::radians(mFov),(float)mWidth/mHeight,0.01f,1000.0f);
         View=glm::lookAt(Origin,Origin+Target,_up);
+//        Target=front;
 
 //        Origin=front;
 

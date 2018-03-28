@@ -9,7 +9,7 @@
 class Camera
 {
 public:
-    Camera(int _width,int _height,glm::vec3 _origin=glm::vec3(0,0,10),glm::vec3 _target=glm::vec3(0));
+    Camera(int _width,int _height,glm::vec3 _origin=glm::vec3(0,0,0),glm::vec3 _target=glm::vec3(0));
     glm::vec3 Origin;
     glm::vec3 Direction;
     glm::vec3 Up;
